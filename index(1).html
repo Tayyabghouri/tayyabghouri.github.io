@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tayyab Mehmood · Full Stack .NET Developer</title>
+<meta name="description" content="Tayyab Mehmood, Full Stack .NET developer in Islamabad building payment gateways, card processing and reporting systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#10141C; --grid:#232A39; --panel:#171D28; --panel-2:#1D2433; --line:#232A39; --chip-line:#2A3344;
+  --text:#D5DCE6; --muted:#8B97A9; --heading:#F1F4F8; --amber:#E9A23B; --teal:#4EC3B4;
+  --sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --wrap:944px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+/* Dark only, by design: the site must look identical whatever theme the viewer or OS uses */
+:root{color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background-color:var(--bg);color:var(--text);font-family:var(--sans);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:42px 42px;background-position:10px 13px}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:3px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+
+/* nav */
+header.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.brand{display:flex;flex-direction:column;line-height:1.2;white-space:nowrap}
+.brand strong{font-size:16px;font-weight:600;color:var(--heading);letter-spacing:-.005em}
+.brand small{font-size:12.5px;color:var(--muted)}
+.nav-right{display:flex;align-items:center;gap:28px}
+nav ul{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}
+nav a{display:block;position:relative;padding:8px 12px;border-radius:4px;font-size:14.5px;font-weight:500;color:var(--muted)}
+nav a:hover{color:var(--heading);background:var(--panel)}
+nav a[aria-current="true"]{color:var(--heading)}
+nav a[aria-current="true"]::after{content:"";position:absolute;left:12px;right:12px;bottom:2px;height:2px;background:var(--amber);border-radius:2px}
+.nav-cta{font-size:14px;font-weight:600;padding:9px 16px;border-radius:4px;background:var(--amber);color:#1A1204;white-space:nowrap}
+.nav-cta:hover{filter:brightness(1.08)}
+.menu-btn{display:none;appearance:none;background:transparent;border:1px solid var(--chip-line);color:var(--heading);border-radius:4px;width:40px;height:40px;cursor:pointer;padding:0}
+.menu-btn svg{display:block;margin:auto}
+@media (max-width:900px){
+  .menu-btn{display:block}
+  .nav-right{gap:12px}
+  nav{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);display:none}
+  nav.open{display:block}
+  nav ul{flex-direction:column;align-items:stretch;gap:0;max-width:var(--wrap);margin:0 auto;padding:8px 24px 16px}
+  nav a{padding:12px 0;border-bottom:1px solid var(--line);border-radius:0}
+  nav a:hover{background:transparent}
+  nav a[aria-current="true"]::after{display:none}
+  nav a[aria-current="true"]{color:var(--amber)}
+}
+@media (max-width:420px){.nav-cta{display:none}}
+
+/* sections */
+section{padding:88px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+.eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0 0 18px}
+.eyebrow::before{content:"";width:28px;height:1px;background:var(--amber)}
+h2{font-size:clamp(26px,3.4vw,34px);line-height:1.2;letter-spacing:-.015em;color:var(--heading);font-weight:600;margin:0 0 36px}
+.lead{color:var(--muted);max-width:62ch;margin:-20px 0 32px}
+
+/* hero */
+.hero{padding:96px 0 80px}
+.hero .loc{font-family:var(--mono);font-size:13.5px;color:var(--teal);margin:0 0 18px}
+.hero h1{font-size:clamp(40px,6.4vw,64px);line-height:1.05;letter-spacing:-.025em;color:var(--heading);margin:0 0 20px;font-weight:700}
+.hero .tag{font-size:clamp(18px,2vw,21px);max-width:44ch;margin:0 0 28px;color:var(--text)}
+.hero .tag strong{color:var(--heading);font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 36px}
+.meta span{font-family:var(--mono);font-size:13px;padding:6px 12px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:3px}
+.path{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:18px 20px}
+.path .cmt{font-family:var(--mono);font-size:13px;color:var(--muted);margin:0 0 10px}
+.path ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-family:var(--mono);font-size:13.5px}
+.path li{color:var(--heading)}
+.path li:not(:last-child)::after{content:"→";color:var(--amber);margin-left:10px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.btn{font-family:var(--mono);font-size:14px;padding:10px 16px;border:1px solid var(--line);background:var(--panel);color:var(--heading);border-radius:3px}
+.btn:hover{border-color:var(--amber)}
+.btn.primary{background:var(--amber);border-color:var(--amber);color:#1A1204;font-weight:600}
+.btn.primary:hover{filter:brightness(1.08)}
+
+/* about */
+.about{display:grid;grid-template-columns:1.45fr 1fr;gap:56px;align-items:start}
+.about p{margin:0 0 18px;max-width:62ch}
+.about strong{color:var(--heading);font-weight:600}
+.kv{border:1px solid var(--line);background:var(--panel);border-radius:4px;margin:0}
+.kv div{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.kv div:last-child{border-bottom:0}
+.kv dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.kv dd{margin:0;font-family:var(--mono);font-size:14px;color:var(--heading);text-align:right}
+@media (max-width:820px){.about{grid-template-columns:1fr;gap:32px}}
+
+/* table-like rows (stack) */
+.table{border:1px solid var(--line);background:var(--panel);border-radius:4px}
+.trow{display:grid;grid-template-columns:180px 1fr;gap:20px;padding:18px 22px;border-bottom:1px solid var(--line);align-items:center}
+.trow:last-child{border-bottom:0}
+.trow h3{margin:0;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:13px;padding:6px 11px;border:1px solid var(--chip-line);background:var(--panel-2);color:var(--heading);border-radius:3px}
+.chip.learn{border-style:dashed;color:var(--amber)}
+@media (max-width:640px){.trow{grid-template-columns:1fr;gap:10px}}
+
+/* payments lifecycle */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:var(--panel);border-radius:4px;overflow:hidden}
+.stage{appearance:none;border:0;border-right:1px solid var(--line);background:transparent;color:inherit;font:inherit;text-align:left;padding:18px 18px 20px;cursor:pointer;border-top:2px solid transparent}
+.stage:last-child{border-right:0}
+.stage .n{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.stage .name{display:block;color:var(--heading);font-weight:600;font-size:17px;margin:6px 0 2px}
+.stage .sys{font-family:var(--mono);font-size:12.5px;color:var(--teal)}
+.stage:hover{background:var(--panel-2)}
+.stage[aria-selected="true"]{background:var(--panel-2);border-top-color:var(--amber)}
+.stage[aria-selected="true"] .n{color:var(--amber)}
+.panel{margin-top:14px;border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:22px 24px;min-height:150px}
+.panel h3{margin:0 0 8px;color:var(--heading);font-size:18px;font-weight:600}
+.panel p{margin:0 0 14px;max-width:70ch}
+@media (max-width:760px){.flow{grid-template-columns:1fr 1fr}.stage:nth-child(2){border-right:0}.stage:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+
+/* experience */
+.jobs{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.job{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:24px 26px}
+.job-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.job h3{margin:0;color:var(--heading);font-size:19px;font-weight:600}
+.job .org{margin:2px 0 0;color:var(--muted);font-size:15px}
+.job .when{font-family:var(--mono);font-size:13px;color:var(--teal);white-space:nowrap}
+.job ul{margin:0 0 16px;padding-left:18px}
+.job li{margin-bottom:6px;max-width:72ch}
+.job li::marker{color:var(--amber)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-family:var(--mono);font-size:12px;padding:3px 8px;border:1px solid var(--line);color:var(--muted);border-radius:3px}
+
+/* work */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:4px;padding:22px 24px;display:flex;flex-direction:column}
+.card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:4px}
+.card h3{margin:0;color:var(--heading);font-size:18px;font-weight:600}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;white-space:nowrap;border:1px solid}
+.status.prod{color:var(--teal);border-color:color-mix(in srgb,var(--teal) 45%,transparent)}
+.status.personal{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 45%,transparent)}
+.card .ctx{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin:0 0 12px}
+.card p{margin:0 0 16px}
+.card .repo{font-family:var(--mono);font-size:13px;color:var(--amber);margin:-4px 0 14px}
+.card .repo:hover{text-decoration:underline}
+.card .tags{margin-top:auto}
+.sub{font-family:var(--mono);font-size:13px;color:var(--muted);margin:44px 0 16px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+
+/* contact */
+.contact h2{font-size:clamp(28px,4.4vw,44px);max-width:20ch;margin-bottom:16px}
+.contact p{color:var(--muted);margin:0 0 28px}
+footer{border-top:1px solid var(--line);padding:26px 0 36px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Tayyab Mehmood, back to top"><strong>Tayyab Mehmood</strong><small>Full Stack .NET Developer</small></a>
+    <div class="nav-right">
+      <nav id="site-nav" aria-label="Sections">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#stack">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#work">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="nav-cta" href="mailto:tayyabghouri65@gmail.com">Hire me</a>
+      <button class="menu-btn" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open menu">
+        <svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="1.8"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <p class="loc">Islamabad, Pakistan</p>
+      <h1>Tayyab Mehmood</h1>
+      <p class="tag">Full Stack .NET Developer building <strong>payment gateways and card processing systems</strong>, from SQL Server to the merchant-facing UI.</p>
+      <div class="meta">
+        <span>5 years full-stack</span>
+        <span>Currently at Croem Pakistan</span>
+        <span>Fintech · Healthcare · Government</span>
+      </div>
+      <div class="path">
+        <p class="cmt">// a card payment through the systems I work on</p>
+        <ol>
+          <li>ClickPago / XpressPago</li>
+          <li>NeoGateway</li>
+          <li>XPP Processor</li>
+          <li>Acquirers &amp; card networks</li>
+          <li>XPP Web Statement</li>
+        </ol>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="mailto:tayyabghouri65@gmail.com">Email me</a>
+        <a class="btn" href="https://github.com/Tayyabghouri" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="btn" href="https://linkedin.com/in/tayyab-mehmood-30710714b" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <p class="eyebrow">About</p>
+      <h2>Payment systems, built and maintained in production</h2>
+      <div class="about">
+        <div>
+          <p>I'm a <strong>Full Stack .NET Developer</strong> based in Islamabad with <strong>5 years</strong> of experience across fintech, healthcare and government systems. I currently work at <strong>Croem Pakistan</strong> on NeoGateway, a multi-tenant payment gateway, and the services around it: transaction processing with acquirers and card networks, recurring billing, payment links and merchant statements.</p>
+          <p>A lot of my work sits in the data layer: optimizing SQL queries, stored procedures and reporting modules to reduce response times, and integrating card processing APIs to improve transaction success rates.</p>
+          <p>Before Croem, I worked on the eFBR and IRIS tax automation systems at <strong>PRAL</strong>, adding real-time functionality with SignalR, and on EHR software at <strong>MTBC</strong> using React, Web API, C# and SQL.</p>
+        </div>
+        <dl class="kv">
+          <div><dt>Experience</dt><dd>5 yrs</dd></div>
+          <div><dt>Role</dt><dd>Software Engineer</dd></div>
+          <div><dt>Employer</dt><dd>Croem Pakistan</dd></div>
+          <div><dt>Prior</dt><dd>PRAL · MTBC</dd></div>
+          <div><dt>Based in</dt><dd>Islamabad, PK</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="wrap">
+      <p class="eyebrow">Skills</p>
+      <h2>What I build with, by layer</h2>
+      <div class="table">
+        <div class="trow"><h3>Client</h3><div class="chips"><span class="chip">Angular</span><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Bootstrap</span><span class="chip">jQuery</span></div></div>
+        <div class="trow"><h3>Server</h3><div class="chips"><span class="chip">ASP.NET Core</span><span class="chip">.NET 10</span><span class="chip">C#</span><span class="chip">Web API</span><span class="chip">MVC</span><span class="chip">Entity Framework</span><span class="chip">LINQ</span><span class="chip">SignalR</span></div></div>
+        <div class="trow"><h3>Data</h3><div class="chips"><span class="chip">SQL Server</span><span class="chip">Stored Procedures</span><span class="chip">Redis Cache</span></div></div>
+        <div class="trow"><h3>Messaging</h3><div class="chips"><span class="chip">RabbitMQ</span></div></div>
+        <div class="trow"><h3>Platform</h3><div class="chips"><span class="chip">Azure DevOps</span><span class="chip">Docker</span><span class="chip">Git</span><span class="chip">GitHub</span></div></div>
+        <div class="trow"><h3>Learning</h3><div class="chips"><span class="chip learn">RAG</span><span class="chip learn">LLM integration</span><span class="chip learn">Microsoft.Extensions.AI</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="payments">
+    <div class="wrap">
+      <p class="eyebrow">Payments</p>
+      <h2>Where my work sits in a card transaction</h2>
+      <p class="lead">Select a stage to see the system and what I built there.</p>
+      <div class="flow" role="tablist" aria-label="Payment lifecycle">
+        <button class="stage" role="tab" aria-selected="true" aria-controls="stage-panel"><span class="n">Stage 1</span><span class="name">Initiate</span><span class="sys">ClickPago · XpressPago</span></button>
+        <button class="stage" role="tab" aria-selected="false" aria-controls="stage-panel"><span class="n">Stage 2</span><span class="name">Route</span><span class="sys">NeoGateway</span></button>
+        <button class="stage" role="tab" aria-selected="false" aria-controls="stage-panel"><span class="n">Stage 3</span><span class="name">Process</span><span class="sys">XPP Processor</span></button>
+        <button class="stage" role="tab" aria-selected="false" aria-controls="stage-panel"><span class="n">Stage 4</span><span class="name">Report</span><span class="sys">XPP Web Statement</span></button>
+      </div>
+      <div class="panel" id="stage-panel" role="tabpanel" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <p class="eyebrow">Experience</p>
+      <h2>Three roles, one thread: .NET systems that handle real transactions</h2>
+      <ol class="jobs">
+        <li class="job">
+          <div class="job-head">
+            <div><h3>Software Engineer</h3><p class="org">Croem Pakistan (Pvt.) Ltd · Islamabad</p></div>
+            <span class="when">Mar 2022 – Present</span>
+          </div>
+          <ul>
+            <li>Developed and maintained NeoGateway, a multi-tenant payment gateway built on ASP.NET MVC, Entity Framework and SQL Server.</li>
+            <li>Worked on XPP Processor, the transaction processing service handling authorization, capture, refund, void and settlement with acquirers and card networks.</li>
+            <li>Worked on XPP Web Statement, the merchant reporting portal for transaction, batch and commission statements.</li>
+            <li>Built XpressPago recurring billing, allowing merchants to schedule and manage repeat card payments.</li>
+            <li>Built ClickPago, a quick credit card payment link solution that simplified merchant onboarding.</li>
+            <li>Integrated credit card processing APIs and recurring payment modules to improve transaction success rates.</li>
+            <li>Optimized SQL queries, stored procedures and reporting modules to reduce response times.</li>
+            <li>Collaborated with cross-functional teams using Agile methodologies for on-time delivery.</li>
+          </ul>
+          <div class="tags"><span>ASP.NET MVC</span><span>Entity Framework</span><span>SQL Server</span><span>C#</span></div>
+        </li>
+        <li class="job">
+          <div class="job-head">
+            <div><h3>Jr. Software Engineer</h3><p class="org">Pakistan Revenue Automation (PRAL) · Islamabad</p></div>
+            <span class="when">Feb 2020 – Aug 2021</span>
+          </div>
+          <ul>
+            <li>Contributed to tax automation systems (eFBR, IRIS) with real-time functionality using SignalR.</li>
+            <li>Enhanced system reliability by fixing critical production bugs and reducing downtime.</li>
+            <li>Collaborated with developers and testers to ensure compliance with tax regulations and smooth releases.</li>
+          </ul>
+          <div class="tags"><span>ASP.NET</span><span>SignalR</span><span>SQL Server</span></div>
+        </li>
+        <li class="job">
+          <div class="job-head">
+            <div><h3>Software Engineer</h3><p class="org">MTBC (U.S.-based) · Pakistan</p></div>
+            <span class="when">Dec 2018 – Dec 2019</span>
+          </div>
+          <ul>
+            <li>Developed and maintained modules for EHR software using React, Web API, C# and SQL.</li>
+            <li>Implemented Medical Voice Assistant and AI-powered features to improve doctor–patient workflows.</li>
+            <li>Contributed to blockchain-based modules for secure healthcare data sharing.</li>
+            <li>Optimized front-end React components for faster load times.</li>
+          </ul>
+          <div class="tags"><span>React</span><span>Web API</span><span>C#</span><span>SQL</span></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <p class="eyebrow">Projects</p>
+      <h2>Featured projects</h2>
+      <div class="grid">
+        <article class="card">
+          <div class="card-head"><h3>NeoGateway</h3><span class="status prod">Production</span></div>
+          <p class="ctx">Croem Pakistan</p>
+          <p>Multi-tenant payment gateway for card processing, merchant and terminal management, and settlement.</p>
+          <div class="tags"><span>ASP.NET MVC</span><span>Entity Framework</span><span>SQL Server</span></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>XPP Processor</h3><span class="status prod">Production</span></div>
+          <p class="ctx">Croem Pakistan</p>
+          <p>Transaction processing service integrating acquirers and card networks for authorization, capture, refund, void and settlement.</p>
+          <div class="tags"><span>C#</span><span>SQL Server</span></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>XPP Web Statement</h3><span class="status prod">Production</span></div>
+          <p class="ctx">Croem Pakistan</p>
+          <p>Merchant portal for transaction, batch and commission statements.</p>
+          <div class="tags"><span>ASP.NET</span><span>SQL Server</span></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>ClickPago / XpressPago</h3><span class="status prod">Production</span></div>
+          <p class="ctx">Croem Pakistan</p>
+          <p>Payment links for quick merchant onboarding, and recurring billing for scheduled repeat card payments.</p>
+          <div class="tags"><span>ASP.NET</span><span>Card processing APIs</span></div>
+        </article>
+      </div>
+
+      <p class="sub">// on GitHub</p>
+      <div class="grid">
+        <article class="card">
+          <div class="card-head"><h3>RAG LLM Qdrant Application</h3><span class="status personal">Personal</span></div>
+          <p class="ctx">C# · .NET 10</p>
+          <p>Console app demonstrating retrieval-augmented generation: embeds a movie catalogue into Qdrant, retrieves the closest matches for a question, and streams an answer from a local Ollama model with short-term conversation memory.</p>
+          <a class="repo" href="https://github.com/Tayyabghouri/RAG-LLM-Qdrant-Application" target="_blank" rel="noopener">github.com/Tayyabghouri/RAG-LLM-Qdrant-Application ↗</a>
+          <div class="tags"><span>Microsoft.Extensions.AI</span><span>Qdrant</span><span>Ollama</span></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>AI Agent with .NET</h3><span class="status personal">Personal</span></div>
+          <p class="ctx">C# · .NET 9</p>
+          <p>Gemini-based console agent with zero NuGet packages. It picks and runs file and shell tools in a loop, with a path sandbox, human approval for commands, token accounting and offline self-tests.</p>
+          <a class="repo" href="https://github.com/Tayyabghouri/AI-Agent-With-.Net" target="_blank" rel="noopener">github.com/Tayyabghouri/AI-Agent-With-.Net ↗</a>
+          <div class="tags"><span>Gemini API</span><span>System.Text.Json</span></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>Redis Cache with .NET 8</h3><span class="status personal">Personal</span></div>
+          <p class="ctx">C# · .NET 8</p>
+          <p>Caching with Redis in a .NET 8 application.</p>
+          <a class="repo" href="https://github.com/Tayyabghouri/RedisCache-With-.Net-8" target="_blank" rel="noopener">github.com/Tayyabghouri/RedisCache-With-.Net-8 ↗</a>
+          <div class="tags"><span>Redis</span><span>.NET 8</span></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>RabbitMQ</h3><span class="status personal">Personal</span></div>
+          <p class="ctx">Messaging</p>
+          <p>A basic example of messaging with RabbitMQ.</p>
+          <a class="repo" href="https://github.com/Tayyabghouri/Rabbit-MQ" target="_blank" rel="noopener">github.com/Tayyabghouri/Rabbit-MQ ↗</a>
+          <div class="tags"><span>RabbitMQ</span></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>School Management System</h3><span class="status personal">Personal</span></div>
+          <p class="ctx">React · Web API · SQL</p>
+          <p>Supports attendance, marks, results and teacher records.</p>
+          <a class="repo" href="https://github.com/Tayyabghouri" target="_blank" rel="noopener">github.com/Tayyabghouri ↗</a>
+          <div class="tags"><span>React</span><span>Web API</span><span>SQL</span></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><h3>Metro E-Ticketing Bus System</h3><span class="status personal">Personal</span></div>
+          <p class="ctx">ASP.NET MVC</p>
+          <p>Digital ticketing for metro transport.</p>
+          <a class="repo" href="https://github.com/Tayyabghouri" target="_blank" rel="noopener">github.com/Tayyabghouri ↗</a>
+          <div class="tags"><span>ASP.NET MVC</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <p class="eyebrow">Education</p>
+      <h2>Education &amp; languages</h2>
+      <div class="table">
+        <div class="trow"><h3>Degree</h3><div>BS Computer Science <span style="color:var(--muted)">· Pir Mehr Ali Shah Arid Agriculture University · 2014 – 2018</span></div></div>
+        <div class="trow"><h3>English</h3><div>Professional working proficiency</div></div>
+        <div class="trow"><h3>Urdu</h3><div>Full professional proficiency</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h2>Let's build payment systems that hold up in production.</h2>
+      <p>Based in Islamabad, Pakistan. Reach out by email, phone or LinkedIn.</p>
+      <div class="actions" style="margin-top:0">
+        <a class="btn primary" href="mailto:tayyabghouri65@gmail.com">tayyabghouri65@gmail.com</a>
+        <a class="btn" href="tel:+923475049108">+92 347 5049108</a>
+        <a class="btn" href="https://linkedin.com/in/tayyab-mehmood-30710714b" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="btn" href="https://github.com/Tayyabghouri" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Tayyab Mehmood · Islamabad, Pakistan</div></footer>
+
+<script>
+(function () {
+  const STAGES = [
+    { title: "ClickPago and XpressPago", body: "Where a payment starts. ClickPago gives merchants quick credit card payment links, which simplified onboarding. XpressPago lets merchants schedule and manage recurring card payments.", ops: ["Payment links", "Recurring billing"] },
+    { title: "NeoGateway", body: "The multi-tenant payment gateway, built on ASP.NET MVC, Entity Framework and SQL Server, covering card processing, merchant and terminal management, and settlement.", ops: ["Multi-tenant", "Merchant management", "Terminal management"] },
+    { title: "XPP Processor", body: "The transaction processing service that integrates with acquirers and card networks. I integrated card processing APIs and recurring payment modules here to improve transaction success rates.", ops: ["Authorization", "Capture", "Refund", "Void", "Settlement"] },
+    { title: "XPP Web Statement", body: "The merchant reporting portal. I optimized SQL queries, stored procedures and reporting modules to reduce response times.", ops: ["Transaction statements", "Batch statements", "Commission statements"] }
+  ];
+  const tabs = Array.from(document.querySelectorAll(".stage"));
+  const panel = document.getElementById("stage-panel");
+
+  function render(index) {
+    const stage = STAGES[index];
+    const h = document.createElement("h3"); h.textContent = stage.title;
+    const p = document.createElement("p"); p.textContent = stage.body;
+    const ops = document.createElement("div"); ops.className = "chips";
+    stage.ops.forEach(function (label) {
+      const s = document.createElement("span"); s.className = "chip"; s.textContent = label; ops.appendChild(s);
+    });
+    panel.replaceChildren(h, p, ops);
+    tabs.forEach(function (t, i) { t.setAttribute("aria-selected", String(i === index)); t.tabIndex = i === index ? 0 : -1; });
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener("click", function () { render(i); });
+    tab.addEventListener("keydown", function (e) {
+      const delta = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!delta) return;
+      const next = (i + delta + tabs.length) % tabs.length;
+      render(next); tabs[next].focus();
+    });
+  });
+  render(0);
+})();
+
+(function () {
+  const nav = document.getElementById("site-nav");
+  const toggle = document.querySelector(".menu-btn");
+  const links = Array.from(nav.querySelectorAll("a"));
+
+  function setMenu(open) {
+    nav.classList.toggle("open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  toggle.addEventListener("click", function () { setMenu(!nav.classList.contains("open")); });
+  links.forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+
+  if (!("IntersectionObserver" in window)) return;
+  const byId = new Map(links.map(function (a) { return [a.getAttribute("href").slice(1), a]; }));
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      links.forEach(function (a) { a.removeAttribute("aria-current"); });
+      const active = byId.get(entry.target.id);
+      if (active) active.setAttribute("aria-current", "true");
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  byId.forEach(function (_, id) { const el = document.getElementById(id); if (el) observer.observe(el); });
+})();
+</script>
+</body>
+</html>
